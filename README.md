@@ -1,6 +1,6 @@
-## Elm-Practice
+# Elm-Practice
 
-# Set up elm
+## Set up elm
 - install elm with npm
 - install atom
 - setup atom for elm (language-elm, elmjutsu, atom-ide-ui, ..).
