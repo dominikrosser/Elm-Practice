@@ -129,7 +129,7 @@ sidebarTop user location =
             [ div [ class "user" ] [ text user ]
             , div [ class "location" ] [ text location ]
             ]
-        , div [ class "photo-actions" ] []
+        , div [ class "photo-actions" ] [ text "Placeholder" ]
         ]
 
 
