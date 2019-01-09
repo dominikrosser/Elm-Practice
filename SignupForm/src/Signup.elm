@@ -2,7 +2,7 @@ module Signup exposing (User, init, initialModel, main, update, view)
 
 import Browser
 import Html exposing (Html, button, div, form, h1, input, text)
-import Html.Attributes exposing (id, type_)
+import Html.Attributes exposing (id, type_, style)
 import Http
 
 
@@ -37,7 +37,8 @@ init _ =
 view : User -> Html msg
 view user =
     div []
-        [ h1 [] [ text "Sign up" ]
+        [ h1 [ Html.Attributes.style "padding-left" "3cm" ]
+             [ text "Sign up" ] 
         , Html.form []
             [ div []
                 [ text "Name"
@@ -71,6 +72,13 @@ view user =
             ]
         ]
 
+headerStyle : Attribute msg
+headerStyle =
+  style "padding-left" "3cm"
+
+formStyle : Attribute msg
+formStyle =
+  style "todo" "todo"
 
 update : msg -> User -> ( User, Cmd Msg )
 update msg model =
