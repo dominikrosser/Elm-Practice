@@ -6,6 +6,7 @@ import Html exposing (..)
 import Json.Decode
 
 
+
 -- MODEL
 
 
@@ -28,6 +29,7 @@ init _ =
 
 type Msg
     = KeyPressed
+    | MouseClicked
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -36,6 +38,9 @@ update msg model =
         KeyPressed ->
             ( model + 1, Cmd.none )
 
+        MouseClicked ->
+            ( model - 1, Cmd.none )
+
 
 
 -- SUBSCRIPTIONS
@@ -43,15 +48,22 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Browser.Events.onKeyDown keyDecoder
+    Sub.batch
+        [ Browser.Events.onKeyDown keyDecoder
+        , Browser.Events.onClick (Json.Decode.succeed MouseClicked)
+        ]
+
 
 keyDecoder : Json.Decode.Decoder Msg
 keyDecoder =
-  Json.Decode.map toKey (Json.Decode.field "key" Json.Decode.string)
+    Json.Decode.map toKey (Json.Decode.field "key" Json.Decode.string)
+
 
 toKey : String -> Msg
 toKey string =
-  KeyPressed
+    KeyPressed
+
+
 
 -- VIEW
 
