@@ -1,4 +1,4 @@
-module DecodingJson exposing (Author, Model, Msg(..), Post, authorDecoder, createErrorMessage, httpCommand, init, main, postDecoder, postListDecoder, update, view, viewError, viewPost, viewPosts, viewPostsOrError, viewTableHeader)
+module DecodingJson exposing (Author, Model, Msg(..), Post, authorDecoder, createErrorMessage, fetchPostsCommand, init, main, postDecoder, postListDecoder, update, view, viewError, viewPost, viewPosts, viewPostsOrError, viewTableHeader)
 
 import Browser
 import Html exposing (..)
@@ -31,7 +31,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ button [ onClick SendHttpRequest ]
-            [ text "Get data from server" ]
+            [ text "Refresh posts" ]
         , viewPostsOrError model
         ]
 
@@ -99,7 +99,7 @@ viewPost post =
 
 type Msg
     = SendHttpRequest
-    | DataReceived (WebData (List Post))
+    | PostsReceived (WebData (List Post))
 
 
 authorDecoder : Decoder Author
@@ -122,11 +122,11 @@ postDecoder =
         (field "author" string)
 
 
-httpCommand : Cmd Msg
-httpCommand =
+fetchPostsCommand : Cmd Msg
+fetchPostsCommand =
     Http.get
         { url = "http://localhost:5019/posts"
-        , expect = Http.expectJson (RemoteData.fromResult >> DataReceived) (list postDecoder)
+        , expect = Http.expectJson (RemoteData.fromResult >> PostsReceived) (list postDecoder)
         }
 
 
@@ -134,9 +134,9 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         SendHttpRequest ->
-            ( { model | posts = RemoteData.Loading }, httpCommand )
+            ( { model | posts = RemoteData.Loading }, fetchPostsCommand )
 
-        DataReceived response ->
+        PostsReceived response ->
             ( { model | posts = response }, Cmd.none )
 
 
@@ -147,9 +147,7 @@ createErrorMessage httpError =
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( { posts = RemoteData.NotAsked }
-    , Cmd.none
-    )
+    ( { posts = RemoteData.Loading }, fetchPostsCommand )
 
 
 main =
