@@ -1,5 +1,5 @@
 .calculator {
-	width: 200px;
+	width: 225px;
 	background: #EEE;
 	border: solid 1px #ccc;
 	border-radius: 1px;
@@ -28,7 +28,7 @@
 
 .calculator .button {
 	background: #7eeaa9;
-	margin: 0px 5px;
+	margin: 2px;
 	overflow: hidden;
 	text-align: center;
 	width: 45px;
