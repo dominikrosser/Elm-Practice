@@ -117,7 +117,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ div []
-            [ input [ type_ "text", placeholder "Subreddit", onInput UpdateReddit ] []
+            [ input [ type_ "text", placeholder "Subreddit", onInput UpdateReddit, value model.subreddit.name ] []
             , button [ onClick GetReddit ] [ text "Go!" ]
             , h3 [] [ text model.subreddit.name ]
             , h3 [] [ text <| "https://www.reddit.com/r/" ++ model.subreddit.name ]
