@@ -1,0 +1,13 @@
+{
+  "name": "PostApp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+	"scripts": {
+		"app": "elm reactor",
+		"server": "json-server --watch server/db.json -p 5019"
+	},
+  "devDependencies": {
+    "elm": "0.19"
+  }
+}
