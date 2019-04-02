@@ -8,20 +8,21 @@ import Types exposing (..)
 view : Post -> Html Msg
 view post =
     div []
-        [ h3 [] [ text "Edit Post" ]
+        [ a [ href "/posts" ] [ text "Back" ]
+        , h3 [] [ text "Edit Post" ]
         , editForm post
         ]
 
 
 editForm : Post -> Html Msg
 editForm post =
-    form []
+    Html.form []
         [ div []
             [ text "Title"
             , br [] []
             , input
                 [ type_ "text"
-                , value pos.title
+                , value post.title
                 ]
                 []
             ]
@@ -31,7 +32,7 @@ editForm post =
             , br [] []
             , input
                 [ type_ "text"
-                , value post.author.name
+                , value post.author
                 ]
                 []
             ]

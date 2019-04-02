@@ -68,6 +68,10 @@ viewTableHeader =
 
 viewPost : Post -> Html Msg
 viewPost post =
+    let
+        postPath =
+            "/posts/" ++ String.fromInt post.id
+    in
     tr []
         [ td []
             [ text (String.fromInt post.id) ]
@@ -76,7 +80,7 @@ viewPost post =
         , td []
             [ text post.author ]
         , td []
-            [ a [ href "" ] [ text "Edit" ] ]
+            [ a [ href postPath ] [ text "Edit" ] ]
         ]
 
 

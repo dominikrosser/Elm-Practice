@@ -1,6 +1,9 @@
-module Types exposing (Author, Model, Msg(..), Post)
+module Types exposing (Author, Model, Msg(..), Post, Route(..))
 
+import Browser
+import Browser.Navigation as Nav
 import RemoteData exposing (WebData)
+import Url
 
 
 
@@ -26,9 +29,19 @@ type alias Post =
 
 type alias Model =
     { posts : WebData (List Post)
+    , key : Nav.Key
+    , currentRoute : Route
     }
 
 
 type Msg
     = FetchPosts
     | PostsReceived (WebData (List Post))
+    | LinkClicked Browser.UrlRequest
+    | UrlChanged Url.Url
+
+
+type Route
+    = PostsRoute
+    | PostRoute Int
+    | NotFoundRoute
