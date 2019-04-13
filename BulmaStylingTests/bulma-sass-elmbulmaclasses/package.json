@@ -1,0 +1,19 @@
+{
+  "name": "bulma-sass-elmbulmaclasses",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "watch": "brunch watch"
+  },
+  "devDependencies": {
+    "elm": "0.19",
+    "elm-brunch": "^0.12.0",
+    "sass-brunch": "^2.10.8"
+  },
+  "dependencies": {
+    "brunch": "^2.10.17",
+    "bulma": "^0.7.4",
+    "sass": "^1.18.0"
+  }
+}
